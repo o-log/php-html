@@ -1,7 +1,5 @@
 <?php
-namespace Imbalance;
-
-use OLOG\Sanitize;
+namespace OLOG;
 
 class HTML
 {

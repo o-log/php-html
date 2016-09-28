@@ -2,13 +2,11 @@
   "name": "o-log/php-html",
   "description": "HTML generation library",
   "require" : {
-    "o-log/php-lib" : "1.*",
-    "o-log/php-router" : "1.*"
+    "o-log/php-lib" : "1.*"
   },
   "autoload" : {
     "psr-0" : {
-      "OLOG" : "",
-      "BTDemo" : ""
+      "OLOG" : ""
     }
   }
 }
