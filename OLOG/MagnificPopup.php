@@ -3,7 +3,7 @@ namespace OLOG;
 
 class MagnificPopup
 {
-    static public function button($create_form_element_id, $class){
+    static public function button($create_form_element_id){
         $html = '';
 
         static $_magnific_popup_scripts_on_page = false;
@@ -13,7 +13,7 @@ class MagnificPopup
             $_magnific_popup_scripts_on_page = true;
         }
 
-        $html .= '<a href="#' . $create_form_element_id . '" class="' . Sanitize::sanitizeAttrValue($class) . ' open-' . $create_form_element_id . '"><span class="glyphicon glyphicon-plus"></span></a>';
+        $html .= '<a href="#' . $create_form_element_id . '" class="btn btn-primary btn-sm open-' . $create_form_element_id . '"><span class="glyphicon glyphicon-plus"></span></a>';
 
         $html .= '<script>
             $(document).ready(
