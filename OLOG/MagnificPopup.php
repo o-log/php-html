@@ -5,8 +5,8 @@ class MagnificPopup
 {
     static public function button(
         $create_form_element_id,
-        $button_classes ='btn btn-primary btn-sm',
-        $buton_contents_html = '<span class="glyphicon glyphicon-plus"></span>'
+        $button_classes,
+        $button_contents_html = '+'
     ){
         $html = '';
 
@@ -17,7 +17,7 @@ class MagnificPopup
             $_magnific_popup_scripts_on_page = true;
         }
 
-        $html .= '<a href="#' . $create_form_element_id . '" class=" ' . $button_classes. ' open-' . $create_form_element_id . '">' . $buton_contents_html . '</a>';
+        $html .= '<a href="#' . $create_form_element_id . '" class=" ' . $button_classes. ' open-' . $create_form_element_id . '">' . $button_contents_html . '</a>';
 
         $html .= '<script>
             $(document).ready(
