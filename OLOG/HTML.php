@@ -4,19 +4,48 @@ namespace OLOG;
 
 class HTML
 {
-    static public function a($url, $text, $classes_str = '')
-    {
-        return '<a class="' . Sanitize::sanitizeAttrValue($classes_str) . '" href="' . Sanitize::sanitizeUrl($url) . '">' . Sanitize::sanitizeTagContent($text) . '</a>';
-    }
+	public static function tag($tag_name, $tag_attribute_arr = [], $html)
+	{
+		if ($tag_name == '') {
+			return '';
+		}
 
-    public static function div($css_class, $id , $html) {
-        if (is_callable($html)) {
-            ob_start();
-            $html();
-            $html = ob_get_clean();
-        }
-        $class = $css_class ? 'class="' . Sanitize::sanitizeAttrValue($css_class) . '"' : '';
-        $id = $id ? 'id="' . $id . '"' : '';
-        return  '<div ' . $class . '  ' . $id . '>' . $html . '</div>';
-    }
+		if (is_callable($html)) {
+			ob_start();
+			$html();
+			$html = ob_get_clean();
+		}
+
+		$tag_attributes = '';
+		foreach ($tag_attribute_arr as $tag_attribute => $tag_attribute_str) {
+			if ($tag_attribute_str == '') {
+				continue;
+			}
+			$tag_attributes .= ' ' . Sanitize::sanitizeAttrValue($tag_attribute) . '="' . Sanitize::sanitizeAttrValue($tag_attribute_str) . '" ';
+		}
+
+		return '<' . Sanitize::sanitizeAttrValue($tag_name) . ' ' . $tag_attributes . '>' . Sanitize::sanitizeTagContent($html) . '</' . Sanitize::sanitizeAttrValue($tag_name) . '>';
+	}
+
+	static public function a($url, $text, $classes_str = '')
+	{
+		return self::tag('a', [
+			'href' => Sanitize::sanitizeUrl($url),
+			'class' => Sanitize::sanitizeAttrValue($classes_str)
+		], Sanitize::sanitizeTagContent($text));
+	}
+
+	public static function div($css_class, $id, $html)
+	{
+		if (is_callable($html)) {
+			ob_start();
+			$html();
+			$html = ob_get_clean();
+		}
+
+		return self::tag('div', [
+			'class' => $css_class,
+			'id' => $id
+		], $html);
+	}
 }
