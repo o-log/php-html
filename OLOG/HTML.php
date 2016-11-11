@@ -24,7 +24,7 @@ class HTML
 			$tag_attributes .= ' ' . Sanitize::sanitizeAttrValue($tag_attribute) . '="' . Sanitize::sanitizeAttrValue($tag_attribute_str) . '" ';
 		}
 
-		return '<' . Sanitize::sanitizeAttrValue($tag_name) . ' ' . $tag_attributes . '>' . Sanitize::sanitizeTagContent($html) . '</' . Sanitize::sanitizeAttrValue($tag_name) . '>';
+		return '<' . Sanitize::sanitizeAttrValue($tag_name) . ' ' . $tag_attributes . '>' . $html . '</' . Sanitize::sanitizeAttrValue($tag_name) . '>';
 	}
 
 	static public function a($url, $text, $classes_str = '')
@@ -32,7 +32,7 @@ class HTML
 		return self::tag('a', [
 			'href' => Sanitize::sanitizeUrl($url),
 			'class' => Sanitize::sanitizeAttrValue($classes_str)
-		], Sanitize::sanitizeTagContent($text));
+		], $text);
 	}
 
 	public static function div($css_class, $id, $html)
