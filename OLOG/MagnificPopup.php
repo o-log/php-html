@@ -13,7 +13,8 @@ class MagnificPopup
         static $_magnific_popup_scripts_on_page = false;
 
         if (!$_magnific_popup_scripts_on_page) {
-            $html .= '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">';
+	        $html .= '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">';
+	        $html .= '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>';
             $_magnific_popup_scripts_on_page = true;
         }
 
