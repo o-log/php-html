@@ -15,3 +15,13 @@ echo \OLOG\HTML::tag(
 		echo 'text';
 	});
 
+echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>';
+
+$create_form_element_id = 'collapse_' . rand(1, 999999);
+
+echo \OLOG\MagnificPopup::button($create_form_element_id, '', 'открыть попап');
+
+echo \OLOG\MagnificPopup::popupHtml(
+	$create_form_element_id,
+	'test content'
+);
