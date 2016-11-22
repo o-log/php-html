@@ -27,7 +27,7 @@ class HTML
 		return '<' . Sanitize::sanitizeAttrValue($tag_name) . ' ' . $tag_attributes . '>' . $html . '</' . Sanitize::sanitizeAttrValue($tag_name) . '>';
 	}
 
-	static public function a($url, $text, $classes_str = '')
+	public static function a($url, $text, $classes_str = '')
 	{
 		return self::tag('a', [
 			'href' => Sanitize::sanitizeUrl($url),
