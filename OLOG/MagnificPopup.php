@@ -4,7 +4,7 @@ namespace OLOG;
 
 class MagnificPopup
 {
-	public static function button($create_form_element_id, $button_classes = 'btn btn-primary btn-sm', $button_contents_html = '<span class="glyphicon glyphicon-plus"></span>')
+	public static function button($create_form_element_id, $button_classes = '', $button_contents_html = '+')
 	{
 		$html = '';
 
