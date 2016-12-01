@@ -27,6 +27,29 @@ class HTML
 		return '<' . Sanitize::sanitizeAttrValue($tag_name) . ' ' . $tag_attributes . '>' . $html . '</' . Sanitize::sanitizeAttrValue($tag_name) . '>';
 	}
 
+	public static function echoTag($tag_name, $tag_attribute_arr = [], $html)
+	{
+		if ($tag_name == '') {
+			return '';
+		}
+
+		if (is_callable($html)) {
+			ob_start();
+			$html();
+			$html = ob_get_clean();
+		}
+
+		$tag_attributes = '';
+		foreach ($tag_attribute_arr as $tag_attribute => $tag_attribute_str) {
+			if ($tag_attribute_str == '') {
+				continue;
+			}
+			$tag_attributes .= ' ' . Sanitize::sanitizeAttrValue($tag_attribute) . '="' . Sanitize::sanitizeAttrValue($tag_attribute_str) . '" ';
+		}
+
+		echo '<' . Sanitize::sanitizeAttrValue($tag_name) . ' ' . $tag_attributes . '>' . $html . '</' . Sanitize::sanitizeAttrValue($tag_name) . '>';
+	}
+
 	public static function a($url, $text, $classes_str = '')
 	{
 		return self::tag('a', [
