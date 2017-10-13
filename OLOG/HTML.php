@@ -18,10 +18,10 @@ class HTML
 
 		$tag_attributes = '';
 		foreach ($tag_attribute_arr as $tag_attribute => $tag_attribute_str) {
-			$tag_attributes .= ' ' . Sanitize::sanitizeAttrValue($tag_attribute) . '="' . Sanitize::sanitizeAttrValue($tag_attribute_str) . '" ';
+			$tag_attributes .= ' ' . self::attr($tag_attribute) . '="' . self::attr($tag_attribute_str) . '" ';
 		}
 
-		return '<' . Sanitize::sanitizeAttrValue($tag_name) . ' ' . $tag_attributes . '>' . $html . '</' . Sanitize::sanitizeAttrValue($tag_name) . '>';
+		return '<' . self::attr($tag_name) . ' ' . $tag_attributes . '>' . $html . '</' . self::attr($tag_name) . '>';
 	}
 
 	public static function echoTag($tag_name, $tag_attribute_arr = [], $html)
@@ -32,8 +32,8 @@ class HTML
 	public static function a($url, $text, $classes_str = '')
 	{
 		return self::tag('a', [
-			'href' => Sanitize::sanitizeUrl($url),
-			'class' => Sanitize::sanitizeAttrValue($classes_str)
+			'href' => self::url($url),
+			'class' => self::attr($classes_str)
 		], $text);
 	}
 
@@ -50,4 +50,21 @@ class HTML
 			'id' => $id
 		], $html);
 	}
+
+    static public function content($value)
+    {
+        $value = htmlspecialchars($value);
+        //$value = preg_replace('@\R@mu', '<br>', $value); // использовать white-space: pre-wrap для вывода строк с переносами внутри
+        return $value;
+    }
+    static public function url($url)
+    {
+        return filter_var($url, FILTER_SANITIZE_URL);
+    }
+
+    static public function attr($value)
+    {
+        return htmlspecialchars($value, ENT_QUOTES | ENT_HTML5);
+    }
+
 }
