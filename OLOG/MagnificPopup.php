@@ -46,7 +46,7 @@ class MagnificPopup
 		$html = HTML::tag('div', [
 			'id' => $create_form_element_id,
 			'class' => 'mfp-hide',
-			'style' => 'position: relative;width: auto;max-width: 700px;margin: 20px auto;padding: 50px 20px 30px 20px;background-color: #ffffff;'
+			'style' => 'position: relative; width: auto; max-width: 700px; margin: 20px auto; padding: 50px 20px 30px 20px; background-color: #ffffff; border-radius: 5px;'
 		], $create_form_html);
 
 		return $html;
