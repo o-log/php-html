@@ -9,13 +9,20 @@ echo \OLOG\HTML::a('/', 'Home');
 echo \OLOG\HTML::div('class', '', 'div');
 
 echo \OLOG\HTML::tag(
-	'div', [
-		'class' => 'class-test',
-		'id' => 'id_test'
-	],
-	function () {
-		echo 'text';
-	});
+    'div', [
+    'class' => 'class-test',
+    'id' => 'id_test'
+],
+    function () {
+        echo 'text';
+    });
+\OLOG\H::tag(
+    'div',     function () {
+    echo 'H::tag';
+},[
+    'class' => 'class-test',
+    'id' => 'id_test'
+]);
 
 echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>';
 

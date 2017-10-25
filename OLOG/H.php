@@ -1,6 +1,6 @@
 <?php
 
-namespace Sud;
+namespace OLOG;
 
 class H
 {
