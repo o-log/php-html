@@ -58,7 +58,7 @@ class HTML
 
     static public function content($value)
     {
-        $value = htmlspecialchars($value);
+        $value = htmlspecialchars((string) $value);
         //$value = preg_replace('@\R@mu', '<br>', $value); // использовать white-space: pre-wrap для вывода строк с переносами внутри
         return $value;
     }
@@ -69,7 +69,7 @@ class HTML
 
     static public function attr($value)
     {
-        return htmlspecialchars($value, ENT_QUOTES | ENT_HTML5);
+        return htmlspecialchars((string) $value, ENT_QUOTES | ENT_HTML5);
     }
 
 }
