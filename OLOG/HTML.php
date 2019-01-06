@@ -1,16 +1,21 @@
 <?php
+declare(strict_types=1);
+
+/**
+ * @author Oleg Loginov <olognv@gmail.com>
+ */
 
 namespace OLOG;
 
 class HTML
 {
-	public static function tag($tag_name, $tag_attribute_arr = [], $html)
+	public static function tag($tag_name, $tag_attribute_arr = [], $html = '')
 	{
 		if ($tag_name == '') {
 			return '';
 		}
 
-		if (is_callable($html)) {
+		if (ClosureService::is_closure($html)) {
 			ob_start();
 			$html();
 			$html = ob_get_clean();
@@ -24,7 +29,7 @@ class HTML
 		return '<' . self::attr($tag_name) . ' ' . $tag_attributes . '>' . $html . '</' . self::attr($tag_name) . '>';
 	}
 
-	public static function echoTag($tag_name, $tag_attribute_arr = [], $html)
+	public static function echoTag($tag_name, $tag_attribute_arr = [], $html = '')
 	{
 		echo self::tag($tag_name, $tag_attribute_arr, $html);
 	}
@@ -37,18 +42,18 @@ class HTML
 		], $text);
 	}
 
-	public static function div($css_class, $id, $html)
+	public static function div($css_class, $id, $html_or_closure)
 	{
-		if (is_callable($html)) {
+		if (ClosureService::is_closure($html_or_closure)) {
 			ob_start();
-			$html();
-			$html = ob_get_clean();
+			$html_or_closure();
+			$html_or_closure = ob_get_clean();
 		}
 
 		return self::tag('div', [
 			'class' => $css_class,
 			'id' => $id
-		], $html);
+		], $html_or_closure);
 	}
 
     static public function content($value)

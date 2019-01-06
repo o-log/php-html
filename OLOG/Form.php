@@ -1,4 +1,9 @@
 <?php
+declare(strict_types=1);
+
+/**
+ * @author Oleg Loginov <olognv@gmail.com>
+ */
 
 namespace OLOG;
 
@@ -7,7 +12,7 @@ class Form
     const FIELD_NAME_OPERATION_CODE = '_OPERATION_CODE';
 
     static public function form($content, string $action, string $method = 'post', array $classes_arr = [], array $attrs_arr = []){
-        if (is_callable($content)) {
+        if (ClosureService::is_closure($content)) {
             ob_start();
             $content();
             $content_html = ob_get_clean();

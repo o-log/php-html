@@ -1,11 +1,16 @@
 <?php
+declare(strict_types=1);
+
+/**
+ * @author Oleg Loginov <olognv@gmail.com>
+ */
 
 namespace OLOG;
 
 class H
 {
     static public function form($content, string $action, string $method = 'post', array $classes_arr = [], array $attrs_arr = []){
-        if (is_callable($content)) {
+        if (ClosureService::is_closure($content)) {
             ob_start();
             $content();
             $content_html = ob_get_clean();
@@ -36,7 +41,7 @@ class H
             return;
         }
 
-        if (is_callable($content)) {
+        if (ClosureService::is_closure($content)) {
             ob_start();
             $content();
             $content = ob_get_clean();
@@ -65,14 +70,14 @@ class H
         ]);
     }
 
-    static public function div($content_html_or_callable, array $classes_arr = [], $id = '')
+    static public function div($content_html_or_closure, array $classes_arr = [], $id = '')
     {
-        if (is_callable($content_html_or_callable)) {
+        if (ClosureService::is_closure($content_html_or_closure)) {
             ob_start();
-            $content_html_or_callable();
+            $content_html_or_closure();
             $content_html = ob_get_clean();
         } else {
-            $content_html = $content_html_or_callable;
+            $content_html = $content_html_or_closure;
         }
 
         self::tag('div', $content_html, [
